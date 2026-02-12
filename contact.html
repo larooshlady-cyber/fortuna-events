@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Fortuna Events</title>
+  <meta name="description" content="Request availability for your next corporate gathering. Tell us about your vision and we will design something purposeful.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="site-header__bar">
+      <a href="index.html" class="site-header__logo" aria-label="Fortuna Events Home">
+        <img src="assets/logo.svg" alt="Fortuna Events" width="120" height="28">
+      </a>
+      <nav class="site-header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="site-header__links">
+          <a href="services.html">Services</a>
+          <a href="work.html">Work</a>
+          <a href="retreats.html">Retreats</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+      <div class="site-header__end">
+        <a href="contact.html" class="btn btn-primary btn--sm">Get in Touch</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Page Hero -->
+    <section class="page-hero page-hero--contact">
+      <div class="page-hero__ring page-hero__ring--1" aria-hidden="true"></div>
+      <div class="page-hero__ring page-hero__ring--2" aria-hidden="true"></div>
+      <div class="page-hero__ring page-hero__ring--3" aria-hidden="true"></div>
+      <div class="page-hero__vignette" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero__badge">
+          <span class="hero__badge-dot"></span>
+          <span>Begin a Conversation</span>
+        </div>
+        <h1>Let's create something<br><span class="text-accent text-accent-shimmer">extraordinary</span>.</h1>
+        <p class="lead mt-md">Share your vision and we'll come back with ideas, availability, and a transparent plan — within one business day.</p>
+      </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <section class="contact-trust-strip reveal" aria-label="Why reach out">
+      <div class="container">
+        <div class="contact-trust-strip__items">
+          <div class="contact-trust-strip__item">
+            <div class="contact-trust-strip__icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><polyline points="12 8 12 12 15 15"/></svg>
+            </div>
+            <div>
+              <strong>24-Hour Response</strong>
+              <p>Every inquiry answered within one business day.</p>
+            </div>
+          </div>
+          <div class="contact-trust-strip__item">
+            <div class="contact-trust-strip__icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong>Confidential</strong>
+              <p>All details are kept strictly private.</p>
+            </div>
+          </div>
+          <div class="contact-trust-strip__item">
+            <div class="contact-trust-strip__icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div>
+              <strong>No Obligation</strong>
+              <p>Initial consultation is always complimentary.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-divider container">
+
+    <!-- Contact Section -->
+    <section class="section section--ambient">
+      <div class="container">
+
+        <!-- Section intro -->
+        <div class="text-center mb-xl reveal">
+          <p class="subhead mb-sm">Your Inquiry</p>
+          <h2>Tell us about your <span class="text-accent text-accent-shimmer">vision</span>.</h2>
+          <p class="lead mt-md">The more detail you share, the more tailored our initial response will be.</p>
+        </div>
+
+        <div class="contact-layout-v2">
+
+          <!-- Form -->
+          <div class="contact-form-wrap reveal-left">
+            <form class="contact-form" id="contact-form" novalidate>
+
+              <!-- Step indicator -->
+              <div class="contact-form__steps" aria-hidden="true">
+                <div class="contact-form__step is-active" data-step="1">
+                  <span class="contact-form__step-num">01</span>
+                  <span class="contact-form__step-label">About You</span>
+                </div>
+                <div class="contact-form__step-line"></div>
+                <div class="contact-form__step" data-step="2">
+                  <span class="contact-form__step-num">02</span>
+                  <span class="contact-form__step-label">Your Event</span>
+                </div>
+                <div class="contact-form__step-line"></div>
+                <div class="contact-form__step" data-step="3">
+                  <span class="contact-form__step-num">03</span>
+                  <span class="contact-form__step-label">Details</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" name="name" required placeholder="Your full name">
+                  <p class="form-error">Please enter your name.</p>
+                </div>
+                <div class="form-group">
+                  <label for="company">Company *</label>
+                  <input type="text" id="company" name="company" required placeholder="Organization name">
+                  <p class="form-error">Please enter your company name.</p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="role">Role</label>
+                  <input type="text" id="role" name="role" placeholder="Your title or role">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required placeholder="you@company.com">
+                  <p class="form-error">Please enter a valid email address.</p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="engagement-type">Engagement Type *</label>
+                <select id="engagement-type" name="engagementType" required>
+                  <option value="" disabled selected>Select an engagement type</option>
+                  <option value="leadership-retreat">Leadership Retreat or Offsite</option>
+                  <option value="corporate-celebration">Corporate Celebration or Milestone Event</option>
+                  <option value="executive-dinner">Executive Dinner or Client Experience</option>
+                  <option value="culture-gathering">Culture and Alignment Gathering</option>
+                  <option value="other">Other</option>
+                </select>
+                <p class="form-error">Please select an engagement type.</p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="date">Date or Timeframe</label>
+                  <input type="text" id="date" name="date" placeholder="e.g. March 2026, Q2 2026">
+                </div>
+                <div class="form-group">
+                  <label for="location">Location</label>
+                  <input type="text" id="location" name="location" placeholder="City, region, or destination">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="guests">Guest Count</label>
+                  <input type="text" id="guests" name="guestCount" placeholder="Approximate number">
+                </div>
+                <div class="form-group">
+                  <label for="budget">Budget Range (Optional)</label>
+                  <select id="budget" name="budget">
+                    <option value="" disabled selected>Select a range</option>
+                    <option value="25-50k">$25,000 – $50,000</option>
+                    <option value="50-100k">$50,000 – $100,000</option>
+                    <option value="100-250k">$100,000 – $250,000</option>
+                    <option value="250k+">$250,000+</option>
+                    <option value="unsure">Not yet determined</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="notes">Tell Us More</label>
+                <textarea id="notes" name="notes" placeholder="Your vision, goals, guest experience aspirations, or any specific requirements..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn--full mt-sm">
+                <span>Submit Inquiry</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </form>
+
+            <!-- Success State -->
+            <div class="form-success" id="form-success">
+              <div class="form-success__icon mb-md">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="30" stroke="url(#successGold)" stroke-width="1"/>
+                  <circle cx="32" cy="32" r="24" stroke="url(#successGold)" stroke-width="0.5" opacity="0.3"/>
+                  <polyline points="22,32 29,39 42,24" stroke="url(#successGold)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="successGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#A08C5B"/>
+                      <stop offset="50%" stop-color="#E8D48B"/>
+                      <stop offset="100%" stop-color="#A08C5B"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h3>Thank you for reaching out.</h3>
+              <p>We've received your inquiry and will respond within one business day with ideas and availability. We look forward to learning more about your vision.</p>
+              <a href="work.html" class="btn btn-secondary mt-lg">Explore Our Work</a>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="contact-sidebar reveal-right">
+
+            <!-- Direct contact card -->
+            <div class="contact-card">
+              <div class="contact-card__header">
+                <h3>Direct Contact</h3>
+                <p>Prefer to reach out directly? We're here.</p>
+              </div>
+              <div class="contact-card__items">
+                <a href="mailto:hello@fortunaevents.com" class="contact-card__item">
+                  <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+                  </div>
+                  <div>
+                    <span class="contact-card__label">Email</span>
+                    <span class="contact-card__value">hello@fortunaevents.com</span>
+                  </div>
+                </a>
+                <a href="tel:+12125550100" class="contact-card__item">
+                  <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <div>
+                    <span class="contact-card__label">Phone</span>
+                    <span class="contact-card__value">+1 (212) 555-0100</span>
+                  </div>
+                </a>
+                <div class="contact-card__item">
+                  <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </div>
+                  <div>
+                    <span class="contact-card__label">Based In</span>
+                    <span class="contact-card__value">New York City</span>
+                  </div>
+                </div>
+                <div class="contact-card__item">
+                  <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  </div>
+                  <div>
+                    <span class="contact-card__label">Service Area</span>
+                    <span class="contact-card__value">NYC + Domestic &amp; International</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- What happens next -->
+            <div class="contact-process">
+              <h4 class="contact-process__title">What Happens Next</h4>
+              <div class="contact-process__steps">
+                <div class="contact-process__step">
+                  <div class="contact-process__step-num">1</div>
+                  <div>
+                    <strong>We Review</strong>
+                    <p>Your inquiry is reviewed by our founding team within 24 hours.</p>
+                  </div>
+                </div>
+                <div class="contact-process__step">
+                  <div class="contact-process__step-num">2</div>
+                  <div>
+                    <strong>We Respond</strong>
+                    <p>We reply with initial ideas, questions, and availability.</p>
+                  </div>
+                </div>
+                <div class="contact-process__step">
+                  <div class="contact-process__step-num">3</div>
+                  <div>
+                    <strong>We Plan</strong>
+                    <p>A complimentary discovery call to align on vision, scope, and budget.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Capabilities link -->
+            <a href="capabilities.html" class="contact-capabilities-link">
+              <div class="contact-capabilities-link__icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div>
+                <strong>View Our Capabilities</strong>
+                <span>Services, process, and pricing guide →</span>
+              </div>
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <img src="assets/logo.svg" alt="Fortuna Events" width="140" height="32">
+          <p>Corporate event planning and management. NYC + Destination.</p>
+        </div>
+        <div>
+          <h4 class="site-footer__heading">Navigate</h4>
+          <div class="site-footer__links">
+            <a href="services.html">Services</a>
+            <a href="work.html">Work</a>
+            <a href="retreats.html">Retreats</a>
+            <a href="about.html">About</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="site-footer__heading">Connect</h4>
+          <div class="site-footer__links">
+            <a href="contact.html">Contact</a>
+            <a href="capabilities.html">Capabilities</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="site-footer__heading">Reach Us</h4>
+          <div class="site-footer__links">
+            <a href="mailto:hello@fortunaevents.com">hello@fortunaevents.com</a>
+            <a href="tel:+12125550100">+1 (212) 555-0100</a>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; 2026 Fortuna Events. All rights reserved.</span>
+        <span>NYC + Destination</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
