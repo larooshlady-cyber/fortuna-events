@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Palettes — Fortuna Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0a0a0a;
+      color: #ccc;
+      line-height: 1.6;
+      padding: 3rem 2rem;
+    }
+
+    .page-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 2.5rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
+    }
+    .page-sub {
+      text-align: center;
+      color: #888;
+      font-size: 0.875rem;
+      margin-bottom: 3rem;
+    }
+
+    .palettes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .palette {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .palette:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .palette__preview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 320px;
+    }
+
+    .palette__left {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .palette__right {
+      display: flex;
+      flex-direction: column;
+    }
+    .palette__right-top {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .palette__right-bottom {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .palette__name {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .palette__tag {
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .palette__hero-text {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .palette__body-text {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    .palette__card {
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .palette__card-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+    .palette__card-text {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .palette__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .palette__btn--secondary {
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* Swatches */
+    .palette__swatches {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .swatch {
+      flex: 1;
+      padding: 1rem 0.75rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .swatch__dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.08);
+    }
+    .swatch__label {
+      font-size: 0.5625rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .swatch__hex {
+      font-size: 0.625rem;
+      font-family: 'Space Grotesk', monospace;
+      opacity: 0.7;
+    }
+
+    /* Active badge */
+    .badge-current {
+      display: inline-block;
+      font-size: 0.5625rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      background: rgba(232,168,56,0.15);
+      color: #e8a838;
+      margin-left: 0.75rem;
+    }
+
+    /* Apply button */
+    .palette__apply {
+      display: none;
+      margin: 0.75rem 1.25rem 1.25rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      transition: background 0.2s;
+      text-align: center;
+    }
+    .palette:hover .palette__apply { display: block; }
+    .palette__apply:hover { background: rgba(255,255,255,0.08); }
+
+    @media (max-width: 700px) {
+      .palette__preview { grid-template-columns: 1fr; }
+      .palette__swatches { flex-wrap: wrap; }
+      .swatch { min-width: 20%; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">Color Palettes</h1>
+  <p class="page-sub">Click any palette to preview it on the main page. Current: Warm Gold (Original)</p>
+
+  <div class="palettes" id="palettes"></div>
+
+  <script>
+    var palettes = [
+      {
+        name: 'Warm Gold',
+        tag: 'Current',
+        current: true,
+        bg: '#0c0b0a',
+        surface: '#141312',
+        surface2: '#1a1918',
+        white: '#fffaf5',
+        gray100: '#ede8e1',
+        gray300: '#b0a99e',
+        gray400: '#948d82',
+        gray500: '#7a7368',
+        gray600: '#5c564d',
+        gray700: '#433e37',
+        gray800: '#2a2622',
+        gray900: '#1e1b18',
+        accent: '#e8a838',
+        accentSoft: 'rgba(232,168,56,0.12)',
+        border: 'rgba(255,250,240,0.07)',
+        borderHover: 'rgba(255,250,240,0.14)',
+        vibe: 'Sophisticated warmth. The original.'
+      },
+      {
+        name: 'Champagne Rose',
+        tag: 'Elegant',
+        bg: '#0d0a0b',
+        surface: '#141112',
+        surface2: '#1b1718',
+        white: '#fff7f5',
+        gray100: '#ede4e1',
+        gray300: '#b0a2a0',
+        gray400: '#948685',
+        gray500: '#7a6d6c',
+        gray600: '#5c504f',
+        gray700: '#433938',
+        gray800: '#2a2323',
+        gray900: '#1e1919',
+        accent: '#d4856e',
+        accentSoft: 'rgba(212,133,110,0.12)',
+        border: 'rgba(255,245,240,0.07)',
+        borderHover: 'rgba(255,245,240,0.14)',
+        vibe: 'Soft rosé tones. Feminine luxury.'
+      },
+      {
+        name: 'Sage & Stone',
+        tag: 'Organic',
+        bg: '#090b0a',
+        surface: '#111413',
+        surface2: '#171b19',
+        white: '#f5faf7',
+        gray100: '#e1ede6',
+        gray300: '#9eb0a5',
+        gray400: '#82948a',
+        gray500: '#687a70',
+        gray600: '#4d5c53',
+        gray700: '#37433c',
+        gray800: '#222a26',
+        gray900: '#181e1b',
+        accent: '#8fae7e',
+        accentSoft: 'rgba(143,174,126,0.12)',
+        border: 'rgba(240,255,245,0.07)',
+        borderHover: 'rgba(240,255,245,0.14)',
+        vibe: 'Natural calm. Retreat-ready.'
+      },
+      {
+        name: 'Arctic Silver',
+        tag: 'Minimal',
+        bg: '#0a0a0c',
+        surface: '#121214',
+        surface2: '#18181b',
+        white: '#f5f5fa',
+        gray100: '#e1e1ed',
+        gray300: '#9e9eb0',
+        gray400: '#828294',
+        gray500: '#68687a',
+        gray600: '#4d4d5c',
+        gray700: '#373743',
+        gray800: '#22222a',
+        gray900: '#18181e',
+        accent: '#a8b4c4',
+        accentSoft: 'rgba(168,180,196,0.12)',
+        border: 'rgba(240,240,255,0.07)',
+        borderHover: 'rgba(240,240,255,0.14)',
+        vibe: 'Cool neutrality. Ultra-modern.'
+      },
+      {
+        name: 'Copper Ember',
+        tag: 'Bold',
+        bg: '#0c0a09',
+        surface: '#141110',
+        surface2: '#1b1816',
+        white: '#fff8f2',
+        gray100: '#ede5dc',
+        gray300: '#b0a294',
+        gray400: '#948576',
+        gray500: '#7a6c5e',
+        gray600: '#5c5047',
+        gray700: '#433932',
+        gray800: '#2a231e',
+        gray900: '#1e1a16',
+        accent: '#c86f3c',
+        accentSoft: 'rgba(200,111,60,0.12)',
+        border: 'rgba(255,248,240,0.07)',
+        borderHover: 'rgba(255,248,240,0.14)',
+        vibe: 'Warm intensity. Artisan craft.'
+      },
+      {
+        name: 'Midnight Sapphire',
+        tag: 'Corporate',
+        bg: '#090a0d',
+        surface: '#101218',
+        surface2: '#161820',
+        white: '#f2f5ff',
+        gray100: '#dce1f0',
+        gray300: '#94a0b8',
+        gray400: '#7a86a0',
+        gray500: '#626e88',
+        gray600: '#4a5570',
+        gray700: '#343e54',
+        gray800: '#212838',
+        gray900: '#181c28',
+        accent: '#5b8fd9',
+        accentSoft: 'rgba(91,143,217,0.12)',
+        border: 'rgba(220,230,255,0.07)',
+        borderHover: 'rgba(220,230,255,0.14)',
+        vibe: 'Trustworthy depth. Finance & tech.'
+      },
+      {
+        name: 'Ivory Noir',
+        tag: 'Timeless',
+        bg: '#0b0b0b',
+        surface: '#131313',
+        surface2: '#1a1a1a',
+        white: '#f8f6f4',
+        gray100: '#e8e6e3',
+        gray300: '#a8a6a3',
+        gray400: '#8c8a87',
+        gray500: '#706e6b',
+        gray600: '#545250',
+        gray700: '#3d3b3a',
+        gray800: '#272625',
+        gray900: '#1c1b1b',
+        accent: '#d4c9b0',
+        accentSoft: 'rgba(212,201,176,0.12)',
+        border: 'rgba(248,246,244,0.07)',
+        borderHover: 'rgba(248,246,244,0.14)',
+        vibe: 'Quiet sophistication. Black & cream.'
+      },
+      {
+        name: 'Plum Velvet',
+        tag: 'Dramatic',
+        bg: '#0c090d',
+        surface: '#141018',
+        surface2: '#1b161f',
+        white: '#faf5ff',
+        gray100: '#ede1f0',
+        gray300: '#b09ab8',
+        gray400: '#9480a0',
+        gray500: '#7a6688',
+        gray600: '#5c4d6a',
+        gray700: '#43374e',
+        gray800: '#2a2232',
+        gray900: '#1e1924',
+        accent: '#b07cc8',
+        accentSoft: 'rgba(176,124,200,0.12)',
+        border: 'rgba(250,240,255,0.07)',
+        borderHover: 'rgba(250,240,255,0.14)',
+        vibe: 'Rich, regal. Evening gala energy.'
+      },
+      {
+        name: 'Desert Sand',
+        tag: 'Earthy',
+        bg: '#0c0b09',
+        surface: '#14120f',
+        surface2: '#1b1914',
+        white: '#fdf8ee',
+        gray100: '#f0e8d6',
+        gray300: '#b8a888',
+        gray400: '#9c8e72',
+        gray500: '#80745e',
+        gray600: '#645a48',
+        gray700: '#484034',
+        gray800: '#2e2820',
+        gray900: '#201c16',
+        accent: '#c4a05c',
+        accentSoft: 'rgba(196,160,92,0.12)',
+        border: 'rgba(253,248,238,0.07)',
+        borderHover: 'rgba(253,248,238,0.14)',
+        vibe: 'Sun-baked elegance. Destination luxury.'
+      },
+      {
+        name: 'Emerald Deep',
+        tag: 'Luxe',
+        bg: '#080c0a',
+        surface: '#0e1410',
+        surface2: '#141b16',
+        white: '#f0faf5',
+        gray100: '#d8eddf',
+        gray300: '#8cb09a',
+        gray400: '#739484',
+        gray500: '#5c7a6a',
+        gray600: '#465c50',
+        gray700: '#324339',
+        gray800: '#1e2a22',
+        gray900: '#161e1a',
+        accent: '#4ec98e',
+        accentSoft: 'rgba(78,201,142,0.12)',
+        border: 'rgba(230,255,240,0.07)',
+        borderHover: 'rgba(230,255,240,0.14)',
+        vibe: 'Deep forest. High-end sustainability.'
+      },
+      {
+        name: 'Blush & Slate',
+        tag: 'Modern',
+        bg: '#0b0a0c',
+        surface: '#131216',
+        surface2: '#1a181e',
+        white: '#faf6f9',
+        gray100: '#ede6eb',
+        gray300: '#b0a4ae',
+        gray400: '#948892',
+        gray500: '#7a6e78',
+        gray600: '#5c525a',
+        gray700: '#433a42',
+        gray800: '#2a242a',
+        gray900: '#1e1a1e',
+        accent: '#d68ba2',
+        accentSoft: 'rgba(214,139,162,0.12)',
+        border: 'rgba(250,240,248,0.07)',
+        borderHover: 'rgba(250,240,248,0.14)',
+        vibe: 'Soft power. Confident femininity.'
+      },
+      {
+        name: 'Obsidian Flame',
+        tag: 'Intense',
+        bg: '#0c0909',
+        surface: '#141010',
+        surface2: '#1b1515',
+        white: '#fff5f3',
+        gray100: '#ede2df',
+        gray300: '#b09a96',
+        gray400: '#94807c',
+        gray500: '#7a6864',
+        gray600: '#5c4e4b',
+        gray700: '#433735',
+        gray800: '#2a2220',
+        gray900: '#1e1a18',
+        accent: '#e05c3e',
+        accentSoft: 'rgba(224,92,62,0.12)',
+        border: 'rgba(255,245,240,0.07)',
+        borderHover: 'rgba(255,245,240,0.14)',
+        vibe: 'Fire and focus. High-impact events.'
+      }
+    ];
+
+    function createPalette(p, index) {
+      var card = document.createElement('div');
+      card.className = 'palette';
+      card.style.background = p.surface;
+
+      var currentBadge = p.current ? '<span class="badge-current">Active</span>' : '';
+
+      card.innerHTML = ''
+        + '<div class="palette__preview">'
+        + '  <div class="palette__left" style="background:' + p.bg + ';color:' + p.white + '">'
+        + '    <div>'
+        + '      <div class="palette__tag" style="color:' + p.accent + '">' + p.tag + '</div>'
+        + '      <div class="palette__name">' + p.name + currentBadge + '</div>'
+        + '      <p class="palette__body-text" style="color:' + p.gray300 + '">' + p.vibe + '</p>'
+        + '    </div>'
+        + '    <div>'
+        + '      <div class="palette__hero-text" style="color:' + p.white + '">Events we are proud <span style="color:' + p.accent + '">of</span>.</div>'
+        + '    </div>'
+        + '    <div style="display:flex;gap:0.5rem;margin-top:1rem">'
+        + '      <div class="palette__btn" style="background:' + p.accent + ';color:' + p.bg + '">Get in Touch →</div>'
+        + '      <div class="palette__btn--secondary" style="border:1px solid ' + p.borderHover + ';color:' + p.gray100 + '">View Services</div>'
+        + '    </div>'
+        + '  </div>'
+        + '  <div class="palette__right">'
+        + '    <div class="palette__right-top" style="background:' + p.surface + '">'
+        + '      <div class="palette__card" style="background:' + p.surface2 + ';border:1px solid ' + p.border + ';color:' + p.white + '">'
+        + '        <div class="palette__card-title">Leadership Summit</div>'
+        + '        <div class="palette__card-text" style="color:' + p.gray400 + '">Executive retreat for 40 industry leaders</div>'
+        + '        <div style="width:40px;height:2px;background:' + p.accent + ';border-radius:1px;margin-top:0.25rem"></div>'
+        + '      </div>'
+        + '      <div class="palette__card" style="background:' + p.surface2 + ';border:1px solid ' + p.border + ';color:' + p.white + '">'
+        + '        <div class="palette__card-title">Gala Evening</div>'
+        + '        <div class="palette__card-text" style="color:' + p.gray400 + '">Annual celebration with 200+ guests</div>'
+        + '        <div style="width:40px;height:2px;background:' + p.accent + ';border-radius:1px;margin-top:0.25rem"></div>'
+        + '      </div>'
+        + '    </div>'
+        + '    <div class="palette__right-bottom" style="background:' + p.bg + '">'
+        + '      <div style="width:32px;height:32px;border-radius:50%;background:' + p.accentSoft + ';display:flex;align-items:center;justify-content:center">'
+        + '        <div style="width:12px;height:12px;border-radius:50%;background:' + p.accent + '"></div>'
+        + '      </div>'
+        + '      <div>'
+        + '        <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:' + p.accent + '">Accent</div>'
+        + '        <div style="font-family:Space Grotesk,monospace;font-size:0.75rem;color:' + p.gray400 + '">' + p.accent + '</div>'
+        + '      </div>'
+        + '    </div>'
+        + '  </div>'
+        + '</div>'
+        + '<div class="palette__swatches" style="background:' + p.bg + '">'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.bg + '"></div><div class="swatch__label">BG</div><div class="swatch__hex">' + p.bg + '</div></div>'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.surface + '"></div><div class="swatch__label">Surface</div><div class="swatch__hex">' + p.surface + '</div></div>'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.surface2 + '"></div><div class="swatch__label">Surface 2</div><div class="swatch__hex">' + p.surface2 + '</div></div>'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.accent + '"></div><div class="swatch__label">Accent</div><div class="swatch__hex">' + p.accent + '</div></div>'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.white + '"></div><div class="swatch__label">White</div><div class="swatch__hex">' + p.white + '</div></div>'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.gray300 + '"></div><div class="swatch__label">Text</div><div class="swatch__hex">' + p.gray300 + '</div></div>'
+        + '  <div class="swatch"><div class="swatch__dot" style="background:' + p.gray700 + '"></div><div class="swatch__label">Muted</div><div class="swatch__hex">' + p.gray700 + '</div></div>'
+        + '</div>';
+
+      return card;
+    }
+
+    var container = document.getElementById('palettes');
+    palettes.forEach(function(p, i) {
+      container.appendChild(createPalette(p, i));
+    });
+  </script>
+</body>
+</html>

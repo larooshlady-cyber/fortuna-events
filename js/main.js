@@ -1,8 +1,6 @@
 /* ============================================================
-   FORTUNA EVENTS - Main JavaScript
-   Navigation, scroll reveal, counters, timeline,
-   case study rendering, form validation,
-   interactive enhancements
+   FORTUNA EVENTS - Luxury Main JavaScript
+   Premium Interactions & Refined Animations
    ============================================================ */
 
 (function () {
@@ -19,6 +17,7 @@
     toggle.addEventListener('click', function () {
       var isOpen = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!isOpen));
+      toggle.classList.toggle('is-active');
       nav.classList.toggle('is-open');
       document.body.style.overflow = !isOpen ? 'hidden' : '';
     });
@@ -26,6 +25,7 @@
     nav.querySelectorAll('.site-header__links a').forEach(function (link) {
       link.addEventListener('click', function () {
         toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('is-active');
         nav.classList.remove('is-open');
         document.body.style.overflow = '';
       });
@@ -34,6 +34,7 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && nav.classList.contains('is-open')) {
         toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('is-active');
         nav.classList.remove('is-open');
         document.body.style.overflow = '';
         toggle.focus();
@@ -43,7 +44,7 @@
 
 
   /* ----------------------------------------------------------
-     2. Scroll Reveal
+     2. Scroll Reveal with Stagger
      ---------------------------------------------------------- */
   function initScrollReveal() {
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -64,14 +65,14 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.06, rootMargin: '0px 0px -80px 0px' });
 
     elements.forEach(function (el) { observer.observe(el); });
   }
 
 
   /* ----------------------------------------------------------
-     3. Animated Counters
+     3. Luxury Animated Counters
      ---------------------------------------------------------- */
   function initCounters() {
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -85,17 +86,18 @@
       return;
     }
 
-    function easeOut(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+    function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
 
     function animate(el) {
       var target = parseInt(el.getAttribute('data-target'), 10);
       var suffix = el.getAttribute('data-suffix') || '';
       var start = null;
+      var duration = 2500;
 
       function step(ts) {
         if (!start) start = ts;
-        var p = Math.min((ts - start) / 2000, 1);
-        el.textContent = Math.floor(easeOut(p) * target) + suffix;
+        var p = Math.min((ts - start) / duration, 1);
+        el.textContent = Math.floor(easeOutExpo(p) * target) + suffix;
         if (p < 1) requestAnimationFrame(step);
         else el.textContent = target + suffix;
       }
@@ -127,10 +129,10 @@
       var scrollY = window.pageYOffset;
 
       // Header scroll state
-      if (scrollY > 40 && !shrunk) {
+      if (scrollY > 60 && !shrunk) {
         header.classList.add('is-scrolled');
         shrunk = true;
-      } else if (scrollY <= 40 && shrunk) {
+      } else if (scrollY <= 60 && shrunk) {
         header.classList.remove('is-scrolled');
         shrunk = false;
       }
@@ -139,7 +141,7 @@
       if (progressBar) {
         var docHeight = document.documentElement.scrollHeight - window.innerHeight;
         var progress = docHeight > 0 ? scrollY / docHeight : 0;
-        progressBar.style.transform = 'scaleX(' + Math.min(progress, 1) + ')';
+        progressBar.style.width = (Math.min(progress, 1) * 100) + '%';
       }
     }
 
@@ -149,7 +151,7 @@
 
 
   /* ----------------------------------------------------------
-     5. Timeline
+     5. Timeline Animation
      ---------------------------------------------------------- */
   function initTimeline() {
     var timeline = document.querySelector('.timeline');
@@ -166,14 +168,14 @@
       return;
     }
 
-    items.forEach(function (item, i) { item.style.transitionDelay = (i * 0.1) + 's'; });
+    items.forEach(function (item, i) { item.style.transitionDelay = (i * 0.12) + 's'; });
 
     var ticking = false;
 
     function update() {
       var rect = timeline.getBoundingClientRect();
       var vh = window.innerHeight;
-      var p = Math.min(Math.max((vh * 0.65 - rect.top) / rect.height, 0), 1);
+      var p = Math.min(Math.max((vh * 0.6 - rect.top) / rect.height, 0), 1);
 
       if (progress) progress.style.height = (p * 100) + '%';
 
@@ -209,7 +211,7 @@
 
 
   /* ----------------------------------------------------------
-     7. Hero Cursor Glow
+     7. Hero Cursor Glow (Luxury Follow Effect)
      ---------------------------------------------------------- */
   function initHeroGlow() {
     var hero = document.querySelector('.hero');
@@ -226,10 +228,10 @@
     function lerp(a, b, t) { return a + (b - a) * t; }
 
     function tick() {
-      currentX = lerp(currentX, targetX, 0.08);
-      currentY = lerp(currentY, targetY, 0.08);
-      glow.style.left = currentX + 'px';
-      glow.style.top = currentY + 'px';
+      currentX = lerp(currentX, targetX, 0.06);
+      currentY = lerp(currentY, targetY, 0.06);
+      glow.style.left = (currentX - 300) + 'px';
+      glow.style.top = (currentY - 300) + 'px';
 
       if (Math.abs(targetX - currentX) > 0.5 || Math.abs(targetY - currentY) > 0.5) {
         requestAnimationFrame(tick);
@@ -269,7 +271,7 @@
         var rect = container.getBoundingClientRect();
         var center = rect.top + rect.height / 2;
         var offset = (center - vh / 2) / vh;
-        var shift = offset * -12;
+        var shift = offset * -15;
         container.style.transform = 'translateY(' + shift.toFixed(2) + 'px)';
       });
     }
@@ -287,7 +289,7 @@
 
 
   /* ----------------------------------------------------------
-     9. Card Tilt (subtle, desktop only)
+     9. Luxury Card Tilt & Magnetic Hover
      ---------------------------------------------------------- */
   function initCardTilt() {
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -301,7 +303,7 @@
         var rect = card.getBoundingClientRect();
         var x = (e.clientX - rect.left) / rect.width - 0.5;
         var y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = 'translateY(-8px) perspective(800px) rotateY(' + (x * 3).toFixed(2) + 'deg) rotateX(' + (-y * 3).toFixed(2) + 'deg)';
+        card.style.transform = 'translateY(-8px) perspective(1000px) rotateY(' + (x * 4).toFixed(2) + 'deg) rotateX(' + (-y * 4).toFixed(2) + 'deg)';
       });
 
       card.addEventListener('mouseleave', function () {
@@ -312,7 +314,32 @@
 
 
   /* ----------------------------------------------------------
-     10. Smooth Scroll for Anchor Links
+     10. Magnetic Buttons
+     ---------------------------------------------------------- */
+  function initMagneticButtons() {
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+    if (window.innerWidth < 1024) return;
+
+    var buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = 'translate(' + (x * 0.15).toFixed(2) + 'px, ' + (y * 0.15).toFixed(2) + 'px)';
+      });
+
+      btn.addEventListener('mouseleave', function () {
+        btn.style.transform = '';
+      });
+    });
+  }
+
+
+  /* ----------------------------------------------------------
+     11. Smooth Scroll for Anchor Links
      ---------------------------------------------------------- */
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
@@ -328,104 +355,88 @@
 
 
   /* ----------------------------------------------------------
-     11. Case Study Rendering
+     12. Text Reveal Animation
+     ---------------------------------------------------------- */
+  function initTextReveal() {
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    var heroTitle = document.querySelector('.hero h1');
+    if (!heroTitle) return;
+
+    heroTitle.style.opacity = '1';
+  }
+
+
+  /* ----------------------------------------------------------
+     13. Case Study Rendering
      ---------------------------------------------------------- */
   var caseStudies = [
     {
       id: 1,
-      title: 'Fintech Leadership Offsite',
-      clientType: 'Financial Technology',
-      location: 'Hudson Valley, New York',
-      guestCount: '42',
-      duration: '3 Days, 2 Nights',
-      goal: 'A rapidly scaling fintech company needed to align its expanded leadership team around a unified product strategy. The team had tripled in 18 months, and decision-making had become fragmented across departments.',
-      approach: 'We designed a three-day offsite at a private estate in the Hudson Valley. The first day focused on individual reflection and relationship building. The second day was structured around facilitated strategy workshops that surfaced competing priorities and built consensus. The final morning was dedicated to commitment and accountability mapping. Every meal, every transition, and every break was designed to support the larger arc of alignment.',
+      title: 'FAST-Infra Label Launch',
+      clientType: 'Sustainable Infrastructure',
+      location: 'New York City',
+      guestCount: '80+',
+      duration: 'Full Day',
+      goal: 'FAST-Infra Label needed to host a high-profile industry gathering bringing together global leaders in sustainable infrastructure investment. The event required a professional setting that would facilitate panel discussions, networking, and meaningful dialogue among senior executives and policymakers.',
+      approach: 'We organized a full-day conference at a premier corporate venue in Midtown Manhattan with panoramic city views. The programming included keynote presentations, moderated panel discussions, and structured networking breaks. Every detail was considered: from branded podium signage and audience seating arrangements to catering that kept the energy high throughout the day. The flow moved naturally between formal presentations and informal connection.',
       outcomes: [
-        'Unified product roadmap agreed upon by all department leads within the retreat itself.',
-        'Cross-functional working groups formed organically, reducing post-retreat decision latency by establishing direct relationships.',
-        'Executive team reported sustained alignment in strategic reviews conducted three months after the offsite.'
+        'Industry leaders from across the sustainable finance sector convened for substantive dialogue on infrastructure investment standards.',
+        'Multiple panel sessions ran seamlessly with professional AV, moderation, and audience engagement throughout the day.',
+        'Attendees praised the organization, professionalism, and creative execution that made the gathering a success.'
       ],
-      images: ['work-1.jpg', 'work-2.jpg', 'work-3.jpg']
+      heroImage: 'assets/events/fast-infra/hero.jpg',
+      cardImage: 'assets/events/fast-infra/panel-3.jpg',
+      images: [
+        'assets/events/fast-infra/hero.jpg',
+        'assets/events/fast-infra/speaker.jpg',
+        'assets/events/fast-infra/panel-1.jpg',
+        'assets/events/fast-infra/panel-2.jpg',
+        'assets/events/fast-infra/panel-3.jpg',
+        'assets/events/fast-infra/networking-1.jpg',
+        'assets/events/fast-infra/networking-2.jpg',
+        'assets/events/fast-infra/attendee.jpg',
+        'assets/events/fast-infra/detail.jpg'
+      ],
+      testimonial: {
+        quote: 'Well organized with highest level of professionalism and creativity, making our gathering a success.',
+        name: 'Hilda Liswani',
+        title: 'Global Relationship Manager, FAST-Infra Label'
+      }
     },
     {
       id: 2,
-      title: 'Private Equity Retreat',
-      clientType: 'Private Equity',
-      location: 'Miami, Florida',
-      guestCount: '28',
-      duration: '2 Days, 1 Night',
-      goal: 'A mid-market private equity firm sought to strengthen partner relationships and articulate a clearer investment thesis as the firm prepared for its next fund raise.',
-      approach: 'We curated a two-day retreat at a private waterfront property in Miami. The experience balanced structured working sessions with carefully designed social moments. A custom dinner on the first evening featured curated conversation pairings. The second day included a facilitated thesis workshop and a closing commitment circle.',
-      outcomes: [
-        'Refined investment thesis articulated and agreed upon, forming the foundation of the firm\'s next fundraise narrative.',
-        'Partners identified two new sector verticals based on insights that surfaced during open dialogue sessions.',
-        'Internal survey showed a measurable increase in partner trust and communication satisfaction following the retreat.'
-      ],
-      images: ['work-2.jpg', 'work-4.jpg', 'work-6.jpg']
-    },
-    {
-      id: 3,
-      title: 'Founder Dinner Series',
-      clientType: 'Venture-Backed Founders',
+      title: 'Highlight Cocktail Reception',
+      clientType: 'Creative & Media',
       location: 'New York City',
-      guestCount: '16',
-      duration: 'Evening (3-Part Series)',
-      goal: 'A venture capital firm wanted to create a recurring, intimate gathering for portfolio founders that would foster genuine peer connection and candid exchange.',
-      approach: 'We designed a three-part dinner series at a private dining room in Manhattan. Each dinner seated 16 founders with strategic seating architecture based on stage, sector, and personality. A conversation facilitator guided the table through structured prompts during the first course, then let organic dialogue carry the evening.',
-      outcomes: [
-        'Multiple founder-to-founder collaborations initiated, including two co-investment opportunities and one strategic partnership.',
-        'Waitlist formed for subsequent series, with 90% of attendees requesting invitations to future dinners.',
-        'The firm reported deeper portfolio engagement and stronger founder loyalty as a direct result of the series.'
-      ],
-      images: ['work-3.jpg', 'work-5.jpg', 'work-1.jpg']
-    },
-    {
-      id: 4,
-      title: 'Healthcare Leadership Summit',
-      clientType: 'Healthcare System',
-      location: 'Chicago, Illinois',
-      guestCount: '60',
-      duration: '2 Days',
-      goal: 'A regional healthcare system needed to unite clinical and operational leadership around a patient-centered strategic plan.',
-      approach: 'We produced a two-day summit at a downtown Chicago venue, designed to feel unlike a medical conference. The space was warm, the pacing was unhurried, and the programming alternated between cross-functional workshops and reflective pauses.',
-      outcomes: [
-        'Twelve cross-functional initiatives launched within 60 days of the summit.',
-        'Participant feedback scored the summit as the most productive leadership gathering in the system\'s history.',
-        'The patient-centered framework developed during the summit became the guiding structure for the system\'s three-year strategic plan.'
-      ],
-      images: ['work-4.jpg', 'work-6.jpg', 'work-2.jpg']
-    },
-    {
-      id: 5,
-      title: 'Creative Agency Retreat',
-      clientType: 'Creative Agency',
-      location: 'Santa Barbara, California',
-      guestCount: '35',
-      duration: '3 Days, 2 Nights',
-      goal: 'A growing creative agency had expanded rapidly and lost touch with its founding vision. The leadership team needed to reconnect the broader team with the creative principles that made the agency distinctive.',
-      approach: 'We designed a three-day retreat at a coastal property in Santa Barbara. The first day focused on storytelling. The second day combined creative workshops with honest operational discussions. The final morning was dedicated to vision mapping.',
-      outcomes: [
-        'The agency\'s founding creative principles were articulated in a shared document that became the basis for hiring and creative review.',
-        'Operational pain points were addressed openly, resulting in three structural changes implemented within 30 days.',
-        'Team retention improved in the two quarters following the retreat.'
-      ],
-      images: ['work-5.jpg', 'work-3.jpg', 'work-1.jpg']
-    },
-    {
-      id: 6,
-      title: 'Year-End Corporate Celebration',
-      clientType: 'Professional Services Firm',
-      location: 'New York City',
-      guestCount: '180',
+      guestCount: '100+',
       duration: 'Evening',
-      goal: 'A professional services firm marking its tenth anniversary wanted an evening that honored the people who built it, without feeling like a typical corporate party.',
-      approach: 'We produced a single-evening celebration at a gallery space in Chelsea. The design concept centered on "a decade in rooms," with each section of the venue reflecting a chapter of the firm\'s history through subtle environmental cues.',
+      goal: 'Highlight, a creative platform, wanted to host an elegant cocktail reception that would bring together founders, creatives, and industry leaders in an atmosphere that felt warm, curated, and genuinely social rather than transactional.',
+      approach: 'We produced an evening reception at a stylish NYC rooftop venue with greenery, ambient lighting, and thoughtful details throughout. The experience included curated cocktails, custom branded touches like printed napkins, and a vintage typewriter station for guest notes. Name tags encouraged organic introductions, and the space was designed to flow naturally between intimate conversation areas and open social zones.',
       outcomes: [
-        'The event received the highest satisfaction scores of any internal gathering in the firm\'s history.',
-        'The memory book became a valued artifact, with team members referencing it in internal communications months later.',
-        'The celebration set a new standard for the firm\'s internal culture.'
+        'Guests connected meaningfully in a warm, inviting atmosphere designed to encourage genuine conversation.',
+        'The curated details and creative touches earned praise for bringing a unique flair that elevated the evening beyond a typical networking event.',
+        'Meticulous organizational skills ensured flawless execution from arrival to farewell.'
       ],
-      images: ['work-6.jpg', 'work-4.jpg', 'work-2.jpg']
+      heroImage: 'assets/events/highlight/hero.jpg',
+      cardImage: 'assets/events/highlight/networking-1.jpg',
+      images: [
+        'assets/events/highlight/hero.jpg',
+        'assets/events/highlight/networking-1.jpg',
+        'assets/events/highlight/portrait.jpg',
+        'assets/events/highlight/cocktails.jpg',
+        'assets/events/highlight/typewriter.jpg',
+        'assets/events/highlight/guests.jpg',
+        'assets/events/highlight/networking-2.jpg',
+        'assets/events/highlight/atmosphere.jpg',
+        'assets/events/highlight/detail.jpg'
+      ],
+      testimonial: {
+        quote: 'Meticulous organizational skills ensured flawless execution; creative flair brought unique touch.',
+        name: 'Ola Parks & Tim Carter',
+        title: 'Co-Founders, Highlight'
+      }
     }
   ];
 
@@ -452,13 +463,24 @@
 
     document.title = study.title + ' | Fortuna Events';
 
-    var imagesHTML = study.images.map(function () {
-      return '<div class="img-placeholder"></div>';
+    var imagesHTML = study.images.map(function (src) {
+      return '<img src="' + src + '" alt="' + study.title + '" class="cs-gallery__img" loading="lazy">';
     }).join('');
 
     var outcomesHTML = study.outcomes.map(function (o) {
       return '<li>' + o + '</li>';
     }).join('');
+
+    var testimonialHTML = '';
+    if (study.testimonial) {
+      testimonialHTML =
+        '<section class="cs-section section--surface"><div class="container container--narrow reveal">' +
+        '<div class="cs-testimonial">' +
+        '<div class="cs-testimonial__mark">&ldquo;</div>' +
+        '<blockquote>' + study.testimonial.quote + '</blockquote>' +
+        '<cite>' + study.testimonial.name + '<span>' + study.testimonial.title + '</span></cite>' +
+        '</div></div></section>';
+    }
 
     container.innerHTML =
       '<section class="page-hero">' +
@@ -477,7 +499,7 @@
       '</div></div></section>' +
       '<hr class="gold-divider container">' +
       '<section class="section--sm"><div class="container reveal">' +
-      '<div class="img-placeholder" style="aspect-ratio: 21/9;"></div>' +
+      '<img src="' + study.heroImage + '" alt="' + study.title + '" class="cs-hero-img">' +
       '</div></section>' +
       '<section class="cs-section"><div class="container container--narrow reveal">' +
       '<h2>Context</h2><p class="text-muted">' + study.goal + '</p>' +
@@ -488,6 +510,7 @@
       '<section class="cs-section"><div class="container container--narrow reveal">' +
       '<h2>Outcomes</h2><ul class="cs-outcomes">' + outcomesHTML + '</ul>' +
       '</div></section>' +
+      testimonialHTML +
       '<section class="cs-section"><div class="container reveal">' +
       '<p class="subhead mb-md">Gallery</p><div class="cs-gallery">' + imagesHTML + '</div>' +
       '</div></section>' +
@@ -496,8 +519,8 @@
       '<h2>Ready to create something <span class="text-accent text-accent-shimmer">meaningful</span>?</h2>' +
       '<p>Every engagement begins with a conversation.</p>' +
       '<div class="cta-block__actions">' +
-      '<a href="contact.html" class="btn btn-primary">Get in Touch <span class="btn-arrow">&rarr;</span></a>' +
-      '<a href="work.html" class="btn btn-secondary">View All Work</a>' +
+      '<a href="contact.html" class="btn btn-primary"><span>Get in Touch</span> <span class="btn-arrow">&rarr;</span></a>' +
+      '<a href="work.html" class="btn btn-secondary"><span>View All Work</span></a>' +
       '</div></div></div></section>';
 
     initScrollReveal();
@@ -505,7 +528,7 @@
 
 
   /* ----------------------------------------------------------
-     12. Contact Form
+     14. Contact Form
      ---------------------------------------------------------- */
   function initContactForm() {
     var form = document.getElementById('contact-form');
@@ -560,7 +583,7 @@
 
 
   /* ----------------------------------------------------------
-     13. Services Nav Scroll Tracking
+     15. Services Nav Scroll Tracking
      ---------------------------------------------------------- */
   function initServicesNav() {
     var nav = document.querySelector('.services-nav');
@@ -631,7 +654,7 @@
 
 
   /* ----------------------------------------------------------
-     14. Contact Form Step Tracking
+     16. Contact Form Step Tracking
      ---------------------------------------------------------- */
   function initContactSteps() {
     var steps = document.querySelectorAll('.contact-form__step');
@@ -649,7 +672,7 @@
     }
 
     function updateSteps() {
-      var step1Active = true; // always active by default
+      var step1Active = true;
       var step2Active = checkStep(aboutFields);
       var step3Active = checkStep(eventFields);
 
@@ -673,7 +696,31 @@
 
 
   /* ----------------------------------------------------------
-     15. Init
+     17. Luxury Loading Animation
+     ---------------------------------------------------------- */
+  function initPageLoad() {
+    document.body.classList.add('is-loaded');
+
+    // Animate page-hero content on sub-pages
+    var pageHero = document.querySelector('.page-hero');
+    if (pageHero) {
+      var children = pageHero.querySelectorAll('.container > *');
+      children.forEach(function (child, i) {
+        child.style.opacity = '0';
+        child.style.transform = 'translateY(20px)';
+        child.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        child.style.transitionDelay = (0.15 + i * 0.12) + 's';
+        requestAnimationFrame(function () {
+          child.style.opacity = '1';
+          child.style.transform = 'translateY(0)';
+        });
+      });
+    }
+  }
+
+
+  /* ----------------------------------------------------------
+     18. Init
      ---------------------------------------------------------- */
   function init() {
     initMobileNav();
@@ -685,11 +732,16 @@
     initHeroGlow();
     initSectionParallax();
     initCardTilt();
+    initMagneticButtons();
     initSmoothScroll();
+    initTextReveal();
     initCaseStudy();
     initContactForm();
     initServicesNav();
     initContactSteps();
+
+    // Delay page load class for smooth entrance
+    setTimeout(initPageLoad, 100);
   }
 
   if (document.readyState === 'loading') {
