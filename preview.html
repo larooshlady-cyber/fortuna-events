@@ -278,6 +278,17 @@
         radial-gradient(ellipse 60% 50% at center 45%, transparent 0%, rgba(12,11,10,0.5) 70%, var(--bg) 100%),
         linear-gradient(180deg, rgba(12,11,10,0.4) 0%, transparent 30%, transparent 60%, var(--bg) 100%);
     }
+    /* Bottom fade strip — bridges hero to page bg */
+    .hero__fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(180deg, transparent, var(--bg));
+      z-index: 1;
+      pointer-events: none;
+    }
 
     /* Subtle warm haze behind hero content */
     .hero__glow {
@@ -1595,8 +1606,8 @@
     }
     .theme-light .hero__overlay {
       background:
-        radial-gradient(ellipse 60% 50% at center 45%, transparent 0%, rgba(12,11,10,0.5) 70%, #0c0b0a 95%, var(--bg) 100%),
-        linear-gradient(180deg, rgba(12,11,10,0.4) 0%, transparent 30%, transparent 55%, #0c0b0a 92%, var(--bg) 100%) !important;
+        radial-gradient(ellipse 60% 50% at center 45%, transparent 0%, rgba(12,11,10,0.5) 70%, #0c0b0a 100%),
+        linear-gradient(180deg, rgba(12,11,10,0.4) 0%, transparent 30%, transparent 60%, #0c0b0a 100%) !important;
     }
     .theme-light .hero__glow {
       background: radial-gradient(ellipse, rgba(232,168,56,0.03) 0%, transparent 70%) !important;
@@ -1746,6 +1757,7 @@
         <div class="hero__slide"><img src="assets/events/fast-infra/panel-3.jpg" alt="Panel speakers at corporate event"></div>
       </div>
       <div class="hero__overlay"></div>
+      <div class="hero__fade"></div>
       <div class="hero__glow"></div>
       <div class="float-dots" id="heroParticles"></div>
       <div class="hero__corner hero__corner--tl"></div>
