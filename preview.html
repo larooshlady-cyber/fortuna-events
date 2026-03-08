@@ -1589,35 +1589,38 @@
     .theme-light .nav__links a:hover { color: var(--white); }
     .theme-light .nav__cta .btn--accent { color: #fff; }
 
-    /* --- Hero --- */
+    /* --- Hero (stays dark even in light mode — only bottom edge fades to --bg) --- */
+    .theme-light .hero {
+      background: #0c0b0a;
+    }
     .theme-light .hero__overlay {
       background:
-        radial-gradient(ellipse 70% 55% at center 45%, transparent 0%, rgba(0,0,0,0.25) 70%, var(--bg) 100%),
-        linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 50%, var(--bg) 100%) !important;
+        radial-gradient(ellipse 60% 50% at center 45%, transparent 0%, rgba(12,11,10,0.5) 70%, #0c0b0a 95%, var(--bg) 100%),
+        linear-gradient(180deg, rgba(12,11,10,0.4) 0%, transparent 30%, transparent 55%, #0c0b0a 92%, var(--bg) 100%) !important;
     }
     .theme-light .hero__glow {
-      background: radial-gradient(ellipse, rgba(0,0,0,0.02) 0%, transparent 70%) !important;
+      background: radial-gradient(ellipse, rgba(232,168,56,0.03) 0%, transparent 70%) !important;
     }
     .theme-light .hero__slide img {
-      filter: brightness(0.50) saturate(0.9) !important;
+      filter: brightness(0.30) saturate(0.7) !important;
     }
     .theme-light .hero__corner::before,
-    .theme-light .hero__corner::after { background: rgba(255,255,255,0.6); }
-    .theme-light .hero__content .eyebrow { color: rgba(255,255,255,0.8); }
+    .theme-light .hero__corner::after { background: var(--accent); }
+    .theme-light .hero__content .eyebrow { color: var(--accent); }
     .theme-light .hero__content .eyebrow::before,
-    .theme-light .hero__content .eyebrow::after { background: rgba(255,255,255,0.5); }
-    .theme-light .hero__content h1 { color: #fff; }
-    .theme-light .hero__content h1 span { color: var(--accent); filter: brightness(1.4); }
-    .theme-light .hero__content p { color: rgba(255,255,255,0.7); }
-    .theme-light .hero__actions .btn--primary { background: #fff; color: #111; }
-    .theme-light .hero__actions .btn--primary:hover { background: #f0f0f0; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
-    .theme-light .hero__actions .btn--outline { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.9); }
-    .theme-light .hero__actions .btn--outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
-    .theme-light .hero__divider { background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent); }
-    .theme-light .hero__scroll-text { color: rgba(255,255,255,0.4); }
-    .theme-light .hero__scroll-line { background: rgba(255,255,255,0.15); }
-    .theme-light .hero__pip { background: rgba(255,255,255,0.2); }
-    .theme-light .hero__pip:hover { background: rgba(255,255,255,0.35); }
+    .theme-light .hero__content .eyebrow::after { background: var(--accent); opacity: 0.5; }
+    .theme-light .hero__content h1 { color: #fffaf5; }
+    .theme-light .hero__content h1 span { color: var(--accent); }
+    .theme-light .hero__content p { color: #948d82; }
+    .theme-light .hero__actions .btn--primary { background: #fffaf5; color: #0c0b0a; }
+    .theme-light .hero__actions .btn--primary:hover { background: #ede8e1; box-shadow: 0 4px 24px rgba(255,250,240,0.08); }
+    .theme-light .hero__actions .btn--outline { border-color: #433e37; color: #b0a99e; }
+    .theme-light .hero__actions .btn--outline:hover { border-color: #7a7368; color: #fffaf5; }
+    .theme-light .hero__divider { background: linear-gradient(180deg, var(--accent), transparent); }
+    .theme-light .hero__scroll-text { color: #5c564d; }
+    .theme-light .hero__scroll-line { background: #2a2622; }
+    .theme-light .hero__pip { background: #433e37; }
+    .theme-light .hero__pip:hover { background: #7a7368; }
 
     /* --- About strip --- */
     .theme-light .about-strip h2 span { color: var(--gray-500); }
